@@ -102,13 +102,13 @@ class MainWindow(Tk):
         buttons_row = Frame(self.main_frame, style="Green.TFrame")
         buttons_row.pack(pady=20, fill='x')
         
-        self.reset_btn = Button(buttons_row, text="Reset", command=self.on_button_click)
+        self.reset_btn = Button(buttons_row, text="Reset", command=self.reset)
         self.reset_btn.grid(row=0, column=0, padx=10)
         
         self.ok_btn = Button(buttons_row, text="OK", command=self.on_button_click)
         self.ok_btn.grid(row=0, column=1, padx=10)
         
-        self.exit_btn = Button(buttons_row, text="Exit", command=self.on_button_click)
+        self.exit_btn = Button(buttons_row, text="Exit", command=self.exit)
         self.exit_btn.grid(row=0, column=2, padx=10)
         
         #set default values
@@ -122,6 +122,16 @@ class MainWindow(Tk):
         
     def on_button_click(self):
         print(f"Full Name: {self.name_textbox.get()} , Residency: {self.residency_choice.get()} , Program: {self.combobox.get()}")
+
+    def exit(self):
+        self.destroy()
+
+    def reset(self):
+        self.name_textbox.delete(0, tk.END)
+        for box in self.course_values:
+            box.set(False)
+        self.fullName = "Nerendra Pershad"
+        self.setDefaultValues()
         
         
         
