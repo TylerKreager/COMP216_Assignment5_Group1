@@ -16,7 +16,7 @@ class MainWindow(Tk):
     def __init__(self):
         super().__init__()
         self.title("Assignment 5 - Part 2")
-        self.geometry("500x500")  # Adjust me after you add your widgets
+        self.geometry("400x400")  # Adjust me after you add your widgets
         self.configure(bg="lightgreen")  # Set background color
         self.create_widgets()
         
@@ -144,6 +144,8 @@ class MainWindow(Tk):
         for box in self.course_values:
             box.set(False)
         self.fullName = "Nerendra Pershad"
+        self.update_idletasks() #used so that .geometry recalculates sizes first, top level main_frame pack prevented this before
+        self.geometry("400x400")
         self.setDefaultValues()
         
         
