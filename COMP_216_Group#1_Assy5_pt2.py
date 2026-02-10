@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Tk , font
+from tkinter import Tk , font, messagebox
 from tkinter import ttk
 from tkinter.ttk import Label, Button, Style, Frame
 
@@ -9,7 +9,9 @@ class MainWindow(Tk):
     fullName = "Nerendra Pershad"
     Residency = ["Domestic", "International"]
     program = ["AI", "Gaming", "Health", "Software"]
-    courses = ["Programming 1", "Web Page Design", "Software Engineering"]
+    courses = {"COMP100":"Programming 1", 
+               "COMP213": "Web Page Design", 
+               "COMP120": "Software Engineering"}
     
     def __init__(self):
         super().__init__()
@@ -91,7 +93,7 @@ class MainWindow(Tk):
         courses_label.grid(row=0, column=0, sticky="w")
         
         self.course_values = []
-        for i, course in enumerate(self.courses):
+        for i, course in enumerate(self.courses.values()):
             var = tk.BooleanVar()
             self.checkbox = tk.Checkbutton(courses_row, text=course, variable=var, bg="lightgreen")
             self.checkbox.grid(row=i, column=1, sticky="w")
@@ -121,7 +123,18 @@ class MainWindow(Tk):
         self.course_values[0].set(True)
         
     def on_button_click(self):
-        print(f"Full Name: {self.name_textbox.get()} , Residency: {self.residency_choice.get()} , Program: {self.combobox.get()}")
+        popup_text = f"{self.name_textbox.get()}\n{self.combobox.get()}\n{self.residency_choice.get()[0:3].lower()}"
+        popup_text += "\n("
+        course_keys = list(self.courses.keys())
+        for i, box in enumerate(self.course_values):
+            if (box.get()):
+                if (i > 0):
+                    popup_text += ",\n"
+                popup_text += (course_keys[i])
+        popup_text += " )"
+
+        messagebox.showinfo("Information", popup_text)
+
 
     def exit(self):
         self.destroy()
